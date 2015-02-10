@@ -6,7 +6,6 @@ typedef struct bsTree BSTree;
 
 struct bsTree{
 	TreeNode_ptr root;
-	int count;
 };
 
 struct treeNode{

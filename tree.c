@@ -4,8 +4,9 @@
 
 
 BSTree createBSTree(void){
-	BSTree *tree = malloc(sizeof(TreeNode_ptr));
+	BSTree *tree = malloc(sizeof(TreeNode));
 	tree->root->data = 0;
-	tree->count = 0;
 	return *tree;
 };
+
+
