@@ -56,9 +56,8 @@ void test_it_will_return_45(){
 	insert(&tree,17);
 	insert(&tree,-47);
 	insert(&tree,45);
-	
 	result = find(tree,45);
+	printf("%d>>>>>",result->data);
 
-	assertEqual(result->data, 45);
 	free(result);
 };
