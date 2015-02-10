@@ -21,6 +21,7 @@ void test_creatTreeNode_will_create_newNode(){
 	assertEqual(node->data,0);
 	assertEqual((int)node->left, 0);
 	assertEqual((int)node->right, 0);
+	free(node);
 };
 
 void test_create_BinaryTree_with_root_node(){
@@ -47,7 +48,7 @@ void test_will_add_value_in_tree_and_return_1_(){
 };
 
 void test_it_will_return_45(){
-	TreeNode_ptr result;
+	TreeNode_ptr result = malloc(sizeof(TreeNode));
 	BSTree tree = createBSTree();
 	insert(&tree,12);
 	insert(&tree,99);
@@ -55,10 +56,9 @@ void test_it_will_return_45(){
 	insert(&tree,17);
 	insert(&tree,-47);
 	insert(&tree,45);
-	// result = tree.root;
-	// printf("%d>>>>",result->data);
-	// result = find(tree,45);
-	// printf("%d>>>.",tree.root->data);
+	
+	result = find(tree,45);
 
-	// assertEqual(result->data, 45);
+	assertEqual(result->data, 45);
+	free(result);
 };

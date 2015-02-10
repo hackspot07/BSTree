@@ -17,14 +17,12 @@ BSTree createBSTree(void){
 	return *tree;
 };
 
-
-TreeNode_ptr temp;
-
 int insert(BSTree *tree, int data){
 	TreeNode_ptr walker = tree->root;
+	TreeNode_ptr temp = createTreeNode(0);
 	if(walker == NULL){
 		walker = createTreeNode(data);
-		if(data >= walker->data && temp != NULL)
+		if(data >= walker->data)
 			temp->right = walker;
 		else
 			temp->left = walker;
@@ -39,4 +37,16 @@ int insert(BSTree *tree, int data){
 		temp = walker;
 	}
 	return insert(tree,data);
+};
+
+
+
+TreeNode_ptr find(BSTree tree, int data){
+	TreeNode_ptr walker = tree.root;
+	if(walker == NULL)
+		return NULL;
+	if(walker->data == data)
+		return walker;
+	walker = (data < walker->data) ? walker->left : walker->right;
+	return find(tree,data);
 };
