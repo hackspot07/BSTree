@@ -14,4 +14,7 @@ struct treeNode{
 	TreeNode_ptr right;
 };
 
+
+TreeNode_ptr createTreeNode(int data);
 BSTree createBSTree(void);
+int insert(BSTree *tree, int data);
