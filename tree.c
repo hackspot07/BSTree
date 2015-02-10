@@ -4,32 +4,39 @@
 
 
 TreeNode_ptr createTreeNode(int data){
-	TreeNode_ptr newNode = malloc(sizeof(TreeNode));
+	TreeNode_ptr newNode = calloc(sizeof(TreeNode),1);
 	newNode->data = data;
-	newNode->left = newNode->right = 0;
+	newNode->left = newNode->right = NULL;
 	return newNode;
 };
 
 
 BSTree createBSTree(void){
-	BSTree *tree = malloc(sizeof(TreeNode));
+	BSTree *tree = calloc(sizeof(TreeNode),1);
 	tree->root = NULL;
 	return *tree;
 };
 
+
+TreeNode_ptr temp;
+
 int insert(BSTree *tree, int data){
-	TreeNode_ptr node;
 	TreeNode_ptr walker = tree->root;
 	if(walker == NULL){
-		node = createTreeNode(data);
-		walker = node;
+		walker = createTreeNode(data);
+		if(data >= walker->data && temp != NULL)
+			temp->right = walker;
+		else
+			temp->left = walker;
 		return 1;
 	}
-	if(data < walker->data)
+	if(data < walker->data){ 
 		walker = walker->left;
-	if(data >= walker->data)
+		temp = walker;
+	}
+	if(data >= walker->data){ 
 		walker = walker->right;
-	insert(tree,data);
-    return 0;
+		temp = walker;
+	}
+	return insert(tree,data);
 };
-

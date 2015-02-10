@@ -1,7 +1,18 @@
 #include "tree.h"
 #include "expr_assert.h"
 #include <stdio.h>
+#include <stdlib.h>
 
+BSTree initializeTree(){
+	BSTree tree = createBSTree();
+	insert(&tree,12);
+	insert(&tree,99);
+	insert(&tree,-42);
+	insert(&tree,17);
+	insert(&tree,-42);
+	insert(&tree,45);
+	return tree;
+};
 
 void test_creatTreeNode_will_create_newNode(){
 	int data = 0;
@@ -33,4 +44,21 @@ void test_will_add_value_in_tree_and_return_1_(){
 
 	assertEqual(boolean1,1);
 	assertEqual(boolean2,1);
+};
+
+void test_it_will_return_45(){
+	TreeNode_ptr result;
+	BSTree tree = createBSTree();
+	insert(&tree,12);
+	insert(&tree,99);
+	insert(&tree,-42);
+	insert(&tree,17);
+	insert(&tree,-47);
+	insert(&tree,45);
+	// result = tree.root;
+	// printf("%d>>>>",result->data);
+	// result = find(tree,45);
+	// printf("%d>>>.",tree.root->data);
+
+	// assertEqual(result->data, 45);
 };
