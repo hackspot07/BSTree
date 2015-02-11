@@ -46,7 +46,7 @@ void test_will_add_value_in_tree_and_return_1_(){
 
 	assertEqual(tree.root->data,100);
 	assertEqual((int)tree.root->left, 0);
-	assertEqual((int)(tree.root->right->data),200);
+	assertEqual(tree.root->right->data,200);
 
 	assertEqual(boolean1,1);
 	assertEqual(boolean2,1);
@@ -54,35 +54,37 @@ void test_will_add_value_in_tree_and_return_1_(){
 void test_it_will_return_add_the_nodes(){
 	TreeNode_ptr result = malloc(sizeof(TreeNode));
 	BSTree tree = createBSTree();
-	insert(&tree,12);
-	insert(&tree,10);
-	insert(&tree,14);
-	insert(&tree,17);
-	insert(&tree,-47);
-
-	insert(&tree,45);
+	tree = initializeTree();
 	
 	assertEqual(tree.root->data,12);
-	assertEqual(tree.root->left->data,10);
-	assertEqual(tree.root->right->data,14);
-	assertEqual(tree.root->right->right->data,17);
+	assertEqual(tree.root->left->data,-42);
+	assertEqual(tree.root->right->data,99);
+	assertEqual(tree.root->right->left->data,17);
+	assertEqual(tree.root->left->right->data,-42);
+	assertEqual(tree.root->right->left->right->data,45);
+	free(result);
 }
 
 void test_it_will_return_45(){
 	TreeNode_ptr result = malloc(sizeof(TreeNode));
 	BSTree tree = createBSTree();
-	insert(&tree,12);
-	insert(&tree,10);
-	insert(&tree,14);
-	insert(&tree,17);
-	insert(&tree,-47);
-	insert(&tree,45);
+	tree = initializeTree();
 	result = find(tree,45);
 	
 	assertEqual(tree.root->data,12);
-	assertEqual(tree.root->left->data,10);
-	assertEqual(tree.root->right->data,14);
-	assertEqual(tree.root->right->right->data,17);
+	assertEqual(tree.root->left->data,-42);
+	assertEqual(tree.root->right->data,99);
+	assertEqual(tree.root->right->left->data,17);
 
 	assertEqual(result->data, 45);
+};
+
+
+void test_it_will_return_NULL(){
+	TreeNode_ptr result = malloc(sizeof(TreeNode));
+	BSTree tree = createBSTree();
+	tree = initializeTree();
+	result = find(tree,49);
+
+	assertEqual((int)result, 0);
 };
