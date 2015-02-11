@@ -19,3 +19,5 @@ TreeNode_ptr createTreeNode(int data);
 BSTree createBSTree(void);
 int insert(BSTree *tree, int data);
 TreeNode_ptr find(BSTree tree, int data);
+
+TreeNode_ptr delete(BSTree* tree,int data);

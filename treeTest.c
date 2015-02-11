@@ -40,16 +40,13 @@ void test_will_add_value_in_tree_and_return_1(){
 
 void test_will_add_value_in_tree_and_return_1_(){
 	BSTree tree = createBSTree();
-	int boolean1,boolean2;
-	boolean1 = insert(&tree,100);
-	boolean2 = insert(&tree,200);
+	int boolean1;
+	insert(&tree,100);
+	insert(&tree,200);
 
 	assertEqual(tree.root->data,100);
 	assertEqual((int)tree.root->left, 0);
 	assertEqual(tree.root->right->data,200);
-
-	assertEqual(boolean1,1);
-	assertEqual(boolean2,1);
 };
 void test_it_will_return_add_the_nodes(){
 	TreeNode_ptr result = malloc(sizeof(TreeNode));
@@ -77,6 +74,7 @@ void test_it_will_return_45(){
 	assertEqual(tree.root->right->left->data,17);
 
 	assertEqual(result->data, 45);
+	free(result);
 };
 
 
@@ -87,4 +85,14 @@ void test_it_will_return_NULL(){
 	result = find(tree,49);
 
 	assertEqual((int)result, 0);
+	free(result);
 };
+
+// void test_delete_tree_will_return_12(){
+// 	TreeNode_ptr result = malloc(sizeof(TreeNode));
+// 	BSTree tree = createBSTree();
+// 	tree = initializeTree();
+// 	result = delete(&tree,12);
+
+// 	assertEqual(result->data,99);
+// };

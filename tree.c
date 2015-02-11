@@ -18,30 +18,40 @@ BSTree createBSTree(void){
 };
 
 
+TreeNode_ptr insertNode(TreeNode_ptr root,int data){
+	if(root == NULL)
+		return createTreeNode(data);
+	if(data < root->data)
+		root->left = insertNode(root->left,data);
+	else
+		root->right = insertNode(root->right,data);
+	return root;
+};
+
 int insert(BSTree *tree, int data){
-	TreeNode_ptr walker = tree->root;
-	TreeNode_ptr prevNode = NULL;
-	if(walker == NULL){
+	if(tree->root == NULL){
 		tree->root = createTreeNode(data);
 		return 1;
 	}
-	while(walker != NULL){
-		prevNode = walker;
-		walker = (data < prevNode->data) ? (walker->left) : (walker->right);
-	}
-	walker = createTreeNode(data);
-	(data >= prevNode->data) ? (prevNode->right = walker) : (prevNode->left = walker);
-	return 1;
+	insertNode(tree->root,data);
+	return 0;
 };
 
 
+TreeNode_ptr searchNode(TreeNode_ptr root,int data){
+	if (root == NULL || root->data == data)
+       return root;
+    return (root->data < data) ? searchNode(root->right, data) : searchNode(root->left, data);
+};
 
 TreeNode_ptr find(BSTree tree, int data){
-	TreeNode_ptr walker = tree.root;
-	while(walker != NULL){ 
-		if(walker->data == data)
-			return walker;
-		walker = (data < walker->data) ? walker->left : walker->right;
-	}
-	return NULL;
+	return searchNode(tree.root,data);
 };
+
+
+
+// TreeNode_ptr delete(BSTree* tree,int data){
+// 	TreeNode_ptr deletedNode,temp,prevNode=NULL,walker = tree->root;
+
+// 	return NULL;
+// };
