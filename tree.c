@@ -12,25 +12,25 @@ TreeNode_ptr createTreeNode(int data){
 
 
 BSTree createBSTree(void){
-	BSTree tree;
-	tree.root = calloc(sizeof(TreeNode),1);
-	return tree;
+	BSTree *tree = malloc(sizeof(BSTree));
+	tree->root = NULL;
+	return *tree;
 };
 
 
 int insert(BSTree *tree, int data){
 	TreeNode_ptr walker = tree->root;
-	TreeNode_ptr exp = NULL;
-	if(walker->data == 0){
+	TreeNode_ptr prevNode = NULL;
+	if(walker == NULL){
 		tree->root = createTreeNode(data);
 		return 1;
 	}
 	while(walker != NULL){
-		exp = walker;
-		walker = (data < exp->data) ? (walker->left) : (walker->right);
+		prevNode = walker;
+		walker = (data < prevNode->data) ? (walker->left) : (walker->right);
 	}
 	walker = createTreeNode(data);
-	(data >= exp->data) ? (exp->right = walker) : (exp->left = walker);
+	(data >= prevNode->data) ? (prevNode->right = walker) : (prevNode->left = walker);
 	return 1;
 };
 
