@@ -88,11 +88,30 @@ void test_it_will_return_NULL(){
 	free(result);
 };
 
-// void test_delete_tree_will_return_12(){
-// 	TreeNode_ptr result = malloc(sizeof(TreeNode));
-// 	BSTree tree = createBSTree();
-// 	tree = initializeTree();
-// 	result = delete(&tree,12);
+void test_find_min_will_give_minus_42(){
+	TreeNode_ptr result = malloc(sizeof(TreeNode));
+	BSTree tree = createBSTree();
+	tree = initializeTree();
+	result = find_min(tree);
 
-// 	assertEqual(result->data,99);
-// };
+	assertEqual(result->data, -42);
+	free(result);
+};
+
+void prinTNode(int data){
+	printf("%d\n",data);
+};
+
+void test_delete_tree_will_return_12(){
+	TreeNode_ptr result = malloc(sizeof(TreeNode));
+	BSTree tree = createBSTree();
+	tree = initializeTree();
+	// result = delete(&tree,99);
+
+	traverse(tree,prinTNode);
+
+	assertEqual(result->data,99);
+	printf("%d",565576);
+	free(result);
+};
+

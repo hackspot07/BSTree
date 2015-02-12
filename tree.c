@@ -28,13 +28,9 @@ TreeNode_ptr insertNode(TreeNode_ptr root,int data){
 	return root;
 };
 
-int insert(BSTree *tree, int data){
-	if(tree->root == NULL){
-		tree->root = createTreeNode(data);
-		return 1;
-	}
-	insertNode(tree->root,data);
-	return 0;
+int insert(BSTree *tree, int data){ 
+	tree->root = insertNode(tree->root,data);
+	return (tree->root)?1:0;
 };
 
 
@@ -49,9 +45,67 @@ TreeNode_ptr find(BSTree tree, int data){
 };
 
 
+void preOrder(TreeNode_ptr root,Printer* printNode){
+	if(root!=NULL){ 
+		printNode(root->data);
+		preOrder(root->left,printNode);
+		preOrder(root->right,printNode);
+	};
+};
 
-// TreeNode_ptr delete(BSTree* tree,int data){
-// 	TreeNode_ptr deletedNode,temp,prevNode=NULL,walker = tree->root;
+void postOrder(TreeNode_ptr root,Printer* printNode){
+	if(root!=NULL){ 
+		preOrder(root->left,printNode);
+		printNode(root->data);
+		preOrder(root->right,printNode);
+	};
+};
 
-// 	return NULL;
-// };
+void inOrder(TreeNode_ptr root,Printer* printNode){
+	if(root!=NULL){ 
+		preOrder(root->left,printNode);
+		preOrder(root->right,printNode);
+		printNode(root->data);
+	};
+};
+
+void traverse(BSTree tree,Printer* printNode){
+	// open the function call which order you want to print the nodes;
+	preOrder(tree.root,printNode);
+	//postOrder(tree.root,printNode);
+	//inOrder(tree.root,printNode);
+};
+
+
+TreeNode_ptr find_min(BSTree tree){ 
+    TreeNode_ptr root = tree.root;
+    while(root->left != NULL)
+    	root = root->left;
+    return root;
+};
+
+TreeNode_ptr getNodeDelete(BSTree* tree,TreeNode_ptr root,int data){
+	TreeNode_ptr temp;
+	if(root == NULL) 
+		return root;
+    if(data < root->data)
+        root->left = getNodeDelete(tree,root->left, data);
+    if(data >= root->data)
+        root->right = getNodeDelete(tree,root->right, data); 
+    if (root->left == NULL){
+        temp = root->right;
+        free(root);
+        return temp;
+    }else if (root->right == NULL){
+        temp = root->left;
+        free(root);
+        return temp;
+   }
+   return temp;
+};
+ 
+TreeNode_ptr delete(BSTree* tree, int data){
+	TreeNode_ptr root = tree->root;
+    TreeNode_ptr walker = getNodeDelete(tree,root,data);
+   	return walker;
+};
